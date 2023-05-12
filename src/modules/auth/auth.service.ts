@@ -34,7 +34,7 @@ export class AuthService {
     }
 
     const token = this.jwtService.sign(payload, {
-      secret: process.env.JWT_SECRET as string,
+      secret: process.env.JWT_SECRET,
       expiresIn: '1d',
     })
     delete user.password
