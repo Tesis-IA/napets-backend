@@ -6,7 +6,9 @@ import {
   HttpException,
   Param,
   Patch,
+  UseGuards,
 } from '@nestjs/common'
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UsersService } from './users.service'
 
@@ -14,6 +16,7 @@ import { UsersService } from './users.service'
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return this.usersService.findAll()
