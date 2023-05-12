@@ -17,6 +17,6 @@ export class Users {
   @Column({ length: 25, nullable: true })
   auth_strategy?: string
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date
 }

@@ -3,6 +3,7 @@ import { HttpException } from '@nestjs/common/exceptions'
 
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { RegisterDto } from '../auth/dto/register.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { Users } from './entities/users.entity'
 
@@ -11,6 +12,19 @@ export class UsersService {
   constructor(
     @InjectRepository(Users) private readonly userRepo: Repository<Users>,
   ) {}
+
+  async create(createUserDto: RegisterDto): Promise<RegisterDto> {
+    const userExists = await this.userRepo.findOne({
+      where: { email: createUserDto.email },
+    })
+
+    if (userExists) {
+      throw new HttpException('User already exists', 400)
+    }
+    const user = this.userRepo.create(createUserDto)
+
+    return await this.userRepo.save(user)
+  }
 
   async findAll(): Promise<Users[]> {
     return await this.userRepo.find()
