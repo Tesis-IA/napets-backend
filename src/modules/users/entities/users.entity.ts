@@ -15,7 +15,7 @@ export class Users {
   password: string
 
   @Column({ length: 25, nullable: true })
-  auth_strategy: string
+  auth_strategy?: string
 
   @Column({ type: 'timestamp' })
   created_at: Date
