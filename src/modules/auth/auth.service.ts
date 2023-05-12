@@ -1,27 +1,61 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
+import { InjectRepository } from '@nestjs/typeorm'
+import { compare, hash } from 'bcrypt'
+import { Repository } from 'typeorm'
 import { Users } from '../users/entities/users.entity'
 import { UsersService } from '../users/users.service'
 import { LoginDto } from './dto/login.dto'
 import { RegisterDto } from './dto/register.dto'
+import { TokenDto } from './dto/token.dto'
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    @InjectRepository(Users) private readonly userRepo: Repository<Users>,
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  async login(loginDto: LoginDto): Promise<Users> {
-    return await this.usersService.findUserByEmail(loginDto.email)
+  async login(loginDto: LoginDto): Promise<TokenDto> {
+    const user = await this.userRepo.findOne({
+      where: { email: loginDto.email },
+    })
+
+    if (!user) throw new HttpException('Credentials not valid', 401)
+
+    const isPasswordValid = await compare(loginDto.password, user.password)
+
+    if (!isPasswordValid) throw new HttpException('Credentials not valid', 401)
+
+    const payload = {
+      id: user.id,
+      email: user.email,
+    }
+
+    const token = this.jwtService.sign(payload, {
+      secret: process.env.JWT_SECRET as string,
+      expiresIn: '1d',
+    })
+    delete user.password
+
+    return { ...user, token }
   }
 
   async register(user: RegisterDto): Promise<RegisterDto> {
     if (!(await this.isEmailValid(user.email))) {
-      throw new Error('Email is not valid')
+      throw new HttpException('invalid email', 400)
     }
 
     if (!(await this.isPasswordValid(user.password))) {
-      throw new Error(
+      throw new HttpException(
         'the password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter and 1 number',
+        400,
       )
     }
+
+    const hashedPassword = await hash(user.password, 10)
+    user.password = hashedPassword
 
     return await this.usersService.create(user)
   }
