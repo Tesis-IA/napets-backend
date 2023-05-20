@@ -21,7 +21,10 @@ import { AuthModule } from './modules/auth/auth.module';
       username: process.env.POSTGRES_USER,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-      // ssl: true,
+      ssl: {      /* <----- Add SSL option */
+        require: true,
+        rejectUnauthorized: false
+      }
     }),
     UsersModule,
     AuthModule,
