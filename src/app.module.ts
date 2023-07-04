@@ -22,8 +22,7 @@ import { AuthModule } from './modules/auth/auth.module'
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       ssl: {
-        /* <----- Add SSL option */
-        requestCert: true,
+        /* <----- Add SSL option */ require: true,
         rejectUnauthorized: false,
       },
     }),
