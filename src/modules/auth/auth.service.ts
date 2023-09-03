@@ -1,13 +1,13 @@
-import { HttpException, Injectable } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
-import { InjectRepository } from '@nestjs/typeorm'
-import { compare, hash } from 'bcrypt'
-import { Repository } from 'typeorm'
-import { Users } from '../users/entities/users.entity'
-import { UsersService } from '../users/users.service'
-import { LoginDto } from './dto/login.dto'
-import { RegisterDto } from './dto/register.dto'
-import { TokenDto } from './dto/token.dto'
+import {HttpException, Injectable} from '@nestjs/common'
+import {JwtService} from '@nestjs/jwt'
+import {InjectRepository} from '@nestjs/typeorm'
+import {compare, hash} from 'bcrypt'
+import {Repository} from 'typeorm'
+import {Users} from '../users/entities/users.entity'
+import {UsersService} from '../users/users.service'
+import {LoginDto} from './dto/login.dto'
+import {RegisterDto} from './dto/register.dto'
+import {TokenDto} from './dto/token.dto'
 
 @Injectable()
 export class AuthService {
@@ -54,8 +54,7 @@ export class AuthService {
       )
     }
 
-    const hashedPassword = await hash(user.password, 10)
-    user.password = hashedPassword
+    user.password = await hash(user.password, 10)
 
     return await this.usersService.create(user)
   }
