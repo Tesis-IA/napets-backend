@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'napets'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F24CF5413D524C8F806EC52382FA0D7B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1BA11BD4045D4A6BBEB0CA50A183F391 }}
           package: .
