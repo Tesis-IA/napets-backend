@@ -26,6 +26,7 @@ export class AuthService {
 
     const isPasswordValid = await compare(loginDto.password, user.password)
 
+    console.log(isPasswordValid)
     if (!isPasswordValid) throw new HttpException('Credentials not valid', 401)
 
     const payload = {

@@ -6,6 +6,7 @@ import {AppService} from './app.service'
 import {UsersModule} from './modules/users/users.module'
 import {AuthModule} from './modules/auth/auth.module'
 import {SubjectsModule} from "./modules/home/subjects/subjects.module";
+import {PredictionService} from "./modules/prediction/prediction.service";
 
 @Module({
     imports: [
@@ -30,7 +31,8 @@ import {SubjectsModule} from "./modules/home/subjects/subjects.module";
         }),
         UsersModule,
         AuthModule,
-        SubjectsModule
+        SubjectsModule,
+        PredictionService
     ],
     controllers: [AppController],
     providers: [AppService],
