@@ -5,9 +5,8 @@ import {AppController} from './app.controller'
 import {AppService} from './app.service'
 import {UsersModule} from './modules/users/users.module'
 import {AuthModule} from './modules/auth/auth.module'
-import {SubjectsModule} from "./modules/home/subjects/subjects.module"
-import {PestDiseaseModule} from "./modules/pest-disease/pest-disease.module"
-import {CropsTipsModule} from "./modules/crops-tips/crops-tips.module";
+import {SubjectsModule} from "./modules/home/subjects/subjects.module";
+import {PredictionService} from "./modules/prediction/prediction.service";
 
 @Module({
     imports: [
@@ -33,8 +32,7 @@ import {CropsTipsModule} from "./modules/crops-tips/crops-tips.module";
         UsersModule,
         AuthModule,
         SubjectsModule,
-        PestDiseaseModule,
-        CropsTipsModule
+        PredictionService
     ],
     controllers: [AppController],
     providers: [AppService],
