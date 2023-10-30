@@ -5,7 +5,8 @@ import {AppController} from './app.controller'
 import {AppService} from './app.service'
 import {UsersModule} from './modules/users/users.module'
 import {AuthModule} from './modules/auth/auth.module'
-import {SubjectsModule} from "./modules/home/subjects/subjects.module";
+import {SubjectsModule} from "./modules/home/subjects/subjects.module"
+import {PestDiseaseModule} from "./modules/pest-disease/pest-disease.module"
 
 @Module({
     imports: [
@@ -30,7 +31,8 @@ import {SubjectsModule} from "./modules/home/subjects/subjects.module";
         }),
         UsersModule,
         AuthModule,
-        SubjectsModule
+        SubjectsModule,
+        PestDiseaseModule
     ],
     controllers: [AppController],
     providers: [AppService],
