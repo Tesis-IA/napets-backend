@@ -10,7 +10,7 @@ export class PestDiseaseService {
     ) {
     }
 
-    async getPestDisease(): Promise<PestDisease[]> {
+    async findAllPestDisease(): Promise<PestDisease[]> {
         return await this.pestDiseaseRepository.find()
     }
 }
