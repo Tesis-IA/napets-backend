@@ -7,6 +7,7 @@ import {UsersModule} from './modules/users/users.module'
 import {AuthModule} from './modules/auth/auth.module'
 import {SubjectsModule} from "./modules/home/subjects/subjects.module"
 import {PestDiseaseModule} from "./modules/pest-disease/pest-disease.module"
+import {CropsTipsModule} from "./modules/crops-tips/crops-tips.module";
 
 @Module({
     imports: [
@@ -32,7 +33,8 @@ import {PestDiseaseModule} from "./modules/pest-disease/pest-disease.module"
         UsersModule,
         AuthModule,
         SubjectsModule,
-        PestDiseaseModule
+        PestDiseaseModule,
+        CropsTipsModule
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -15,7 +15,6 @@ export class PestDiseaseController {
 
     @Get(':id')
     async findPestDiseaseDetailById(@Param('id') id: string) {
-        console.log("id " + id)
         return this.pestDiseaseDetailsService.findPestAndDiseaseById(+id)
     }
 }
