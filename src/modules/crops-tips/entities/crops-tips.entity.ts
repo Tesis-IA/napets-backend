@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {CropsTipsDetails} from "../crops-tips-details/entities/crops-tips-details.entity";
 
 @Entity()
 export class CropsTips {
@@ -16,4 +17,8 @@ export class CropsTips {
 
     @Column()
     shape_background: string
+
+    @OneToMany(() => CropsTipsDetails, (cropsTipsDetails) => cropsTipsDetails.id, { cascade: true })
+    @JoinColumn({name: 'fk_crops_tips_details_id'})
+    cropsTipsDetails: CropsTipsDetails[]
 }

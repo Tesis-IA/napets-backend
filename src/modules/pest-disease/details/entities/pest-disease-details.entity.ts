@@ -27,7 +27,7 @@ export class PestDiseaseDetails {
     @Column("text", {array: true})
     image: string[]
 
-    @OneToOne(() => PestDisease, (PestDisease) => PestDisease.id, {cascade: true})
+    @OneToOne(() => PestDisease, (pestDisease) => pestDisease.id, {cascade: true})
     @JoinColumn({ name: "fk_pest_disease_id" })
     pest_disease: PestDisease
 }
