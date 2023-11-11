@@ -8,7 +8,6 @@ import {AuthModule} from './modules/auth/auth.module'
 import {SubjectsModule} from "./modules/home/subjects/subjects.module"
 import {PestDiseaseModule} from "./modules/pest-disease/pest-disease.module"
 import {CropsTipsModule} from "./modules/crops-tips/crops-tips.module";
-import {CropsTipsDetails} from "./modules/crops-tips/crops-tips-details/entities/crops-tips-details.entity";
 
 @Module({
     imports: [
