@@ -10,7 +10,4 @@ export class PredictionService {
     ) {
     }
 
-    async getPrediction()  {
-
-    }
 }

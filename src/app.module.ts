@@ -7,6 +7,7 @@ import {UsersModule} from './modules/users/users.module'
 import {AuthModule} from './modules/auth/auth.module'
 import {SubjectsModule} from "./modules/home/subjects/subjects.module";
 import {PredictionService} from "./modules/prediction/prediction.service";
+import { PredictionModule } from './modules/prediction/prediction.module'
 
 @Module({
     imports: [
@@ -32,7 +33,7 @@ import {PredictionService} from "./modules/prediction/prediction.service";
         UsersModule,
         AuthModule,
         SubjectsModule,
-        PredictionService
+        PredictionModule
     ],
     controllers: [AppController],
     providers: [AppService],
