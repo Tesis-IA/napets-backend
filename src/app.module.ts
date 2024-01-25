@@ -5,12 +5,16 @@ import {AppController} from './app.controller'
 import {AppService} from './app.service'
 import {UsersModule} from './modules/users/users.module'
 import {AuthModule} from './modules/auth/auth.module'
-import {SubjectsModule} from "./modules/home/subjects/subjects.module"
-import {PestDiseaseModule} from "./modules/pest-disease/pest-disease.module"
-import {CropsTipsModule} from "./modules/crops-tips/crops-tips.module";
+import {SubjectsModule} from "./modules/home/subjects/subjects.module";
+import { join } from 'path'
+import { PredictionModule } from './modules/prediction/prediction.module'
+import { ServeStaticModule } from '@nestjs/serve-static'
 
 @Module({
     imports: [
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, '..')
+        }),
         ConfigModule.forRoot({
             envFilePath: '.env',
             isGlobal: true,
@@ -33,8 +37,7 @@ import {CropsTipsModule} from "./modules/crops-tips/crops-tips.module";
         UsersModule,
         AuthModule,
         SubjectsModule,
-        PestDiseaseModule,
-        CropsTipsModule
+        PredictionModule
     ],
     controllers: [AppController],
     providers: [AppService],
