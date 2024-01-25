@@ -6,11 +6,15 @@ import {AppService} from './app.service'
 import {UsersModule} from './modules/users/users.module'
 import {AuthModule} from './modules/auth/auth.module'
 import {SubjectsModule} from "./modules/home/subjects/subjects.module";
-import {PredictionService} from "./modules/prediction/prediction.service";
+import { join } from 'path'
 import { PredictionModule } from './modules/prediction/prediction.module'
+import { ServeStaticModule } from '@nestjs/serve-static'
 
 @Module({
     imports: [
+        ServeStaticModule.forRoot({
+            rootPath: join(__dirname, '..')
+        }),
         ConfigModule.forRoot({
             envFilePath: '.env',
             isGlobal: true,
