@@ -1,1 +1,1 @@
-export const API_IA_URL = "http://127.0.0.1:8000/api/v1/predictions/predictions"
+export const API_IA_URL = "https://napets-backend-cnn-development.up.railway.app/api/v1/predictions/predictions"

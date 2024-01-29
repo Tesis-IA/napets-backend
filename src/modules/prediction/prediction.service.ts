@@ -7,7 +7,6 @@ import { HttpService } from '@nestjs/axios'
 import { API_IA_URL } from '../../utils/constant'
 import { AxiosResponse } from 'axios'
 import { map, Observable, tap } from 'rxjs'
-import { Express } from 'express'
 
 @Injectable()
 export class PredictionService {
