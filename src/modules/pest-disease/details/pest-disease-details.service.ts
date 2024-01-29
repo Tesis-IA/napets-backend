@@ -20,7 +20,7 @@ export class PestDiseaseDetailsService {
             }
         })
         if (!result) {
-            throw new HttpException('Pets or disease not found', 404)
+            throw new HttpException('Los detalles de esta enfermedad aun no han sido registrados', 404)
         }
         return result
     }
