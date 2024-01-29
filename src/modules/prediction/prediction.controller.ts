@@ -29,7 +29,7 @@ export class PredictionController {
     }),
   )
   async makePrediction(@Req() request: Request) {
-    const baseUrl = `https://${request.get('Host')}/public/${FileName.fileName}`
+    const baseUrl = `${request.protocol}://${request.get('Host')}/public/${FileName.fileName}`
     console.log(baseUrl)
     return this.predictionService.makePrediction({
       'url_image': baseUrl

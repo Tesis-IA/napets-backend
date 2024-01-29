@@ -11,8 +11,11 @@ export class Prediction {
     @Column()
     description: string
 
-    @Column()
-    warning: string
+    @Column( "text", {array: true} )
+    images: string[]
+
+    @Column( "text", {array: true} )
+    warning: string[]
 
     @Column( "text", {array: true} )
     more_info: string[]

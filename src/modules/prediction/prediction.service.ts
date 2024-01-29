@@ -5,8 +5,10 @@ import {Repository} from "typeorm";
 import { CreatePredictionDto } from './dto/create-prediction'
 import { HttpService } from '@nestjs/axios'
 import { API_IA_URL } from '../../utils/constant'
-import { AxiosResponse } from 'axios'
-import { map, Observable, tap } from 'rxjs'
+import { AxiosError } from 'axios'
+import { catchError, firstValueFrom, tap } from 'rxjs'
+import { HttpException } from '@nestjs/common/exceptions'
+import { PredictionDTO } from './dto/prediction'
 
 @Injectable()
 export class PredictionService {
@@ -16,13 +18,18 @@ export class PredictionService {
     ) {
     }
 
-    async makePrediction(createPredictionDto: CreatePredictionDto): Promise<Observable<AxiosResponse<any>>> {
-        const data = this.httpService.post(API_IA_URL, createPredictionDto).pipe(
-          tap((resp) => console.log(resp)),
-          map((resp) => resp.data),
-          tap((data) =>  console.log(data)),
-        );
-        console.log(data)
-        return data
+    async makePrediction(createPredictionDto: CreatePredictionDto) {
+      const { data } = await firstValueFrom(
+          this.httpService.post<PredictionDTO>(API_IA_URL, createPredictionDto).pipe(
+            catchError((err: AxiosError) => {
+              throw new HttpException(`An occurred when trying get prediction from IA model: ${err}`, 404)
+            })
+          )
+        )
+      return await this.predictionRepository.findOne({
+        where: {
+          id: data.id
+        }
+      })
     }
 }
