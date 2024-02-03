@@ -6,7 +6,7 @@ import { CreatePredictionDto } from './dto/create-prediction'
 import { HttpService } from '@nestjs/axios'
 import { API_IA_URL } from '../../utils/constant'
 import { AxiosError } from 'axios'
-import { catchError, firstValueFrom, tap } from 'rxjs'
+import { catchError, firstValueFrom } from 'rxjs'
 import { HttpException } from '@nestjs/common/exceptions'
 import { PredictionDTO } from './dto/prediction'
 

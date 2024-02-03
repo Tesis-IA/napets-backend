@@ -4,7 +4,7 @@ import {Prediction} from "./entities/prediction.entity";
 import {PredictionController} from "./prediction.controller";
 import {PredictionService} from "./prediction.service";
 import { HttpModule } from '@nestjs/axios'
-import { Product } from './entities/product.entity'
+import { Product } from '../product/entities/product.entity'
 
 @Module({
     imports: [TypeOrmModule.forFeature([Prediction, Product]), HttpModule],

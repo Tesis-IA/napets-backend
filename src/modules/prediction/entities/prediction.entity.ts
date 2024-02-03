@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Product } from './product.entity'
+import { Product } from '../../product/entities/product.entity'
 
 @Entity()
 export class Prediction {

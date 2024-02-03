@@ -1,5 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
-import { Prediction } from './prediction.entity'
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Prediction } from '../../prediction/entities/prediction.entity'
 
 @Entity()
 export class Product {
