@@ -22,11 +22,11 @@ export class AuthService {
       where: { email: loginDto.email },
     })
 
-    if (!user) throw new HttpException('Credentials not valid', 401)
+    if (!user) throw new HttpException('El correo suministrado no existe', 401);
 
-    const isPasswordValid = await compare(loginDto.password, user.password)
+    const isPasswordValid = await compare(loginDto.password, user.password);
 
-    if (!isPasswordValid) throw new HttpException('Credentials not valid', 401)
+    if (!isPasswordValid) throw new HttpException('Credenciales inválidas', 401);
 
     const payload = {
       id: user.id,
@@ -43,29 +43,38 @@ export class AuthService {
   }
 
   async register(user: RegisterDto): Promise<RegisterDto> {
+    console.log(user);
     if (!(await this.isEmailValid(user.email))) {
-      throw new HttpException('invalid email', 400)
+      throw new HttpException('Formato de correo invalido', 400)
+    }
+
+    const mailExists = await this.userRepo.findOne({
+      where: { email: user.email },
+    })
+
+    if(mailExists) {
+      throw new HttpException('Este correo ya está siendo utilizado por otro usuario', 400);
     }
 
     if (!(await this.isPasswordValid(user.password))) {
       throw new HttpException(
-        'the password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter and 1 number',
+        "La contraseña debe contener al menos 8 caracteres, 1 letra mayúscula, 1 letra minúscula y 1 número.",
         400,
-      )
+      );
     }
 
-    user.password = await hash(user.password, 10)
+    user.password = await hash(user.password, 10);
 
-    return await this.usersService.create(user)
+    return await this.usersService.create(user);
   }
 
   async isEmailValid(email: string): Promise<boolean> {
-    const emailRegex = /\S+@\S+\.\S+/
-    return emailRegex.test(email)
+    const emailRegex = /\S+@\S+\.\S+/;
+    return emailRegex.test(email);
   }
 
   async isPasswordValid(password: string): Promise<boolean> {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-    return passwordRegex.test(password)
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    return passwordRegex.test(password);
   }
 }
