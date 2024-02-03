@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Product } from './product.entity'
 
 @Entity()
 export class Prediction {
@@ -22,4 +23,8 @@ export class Prediction {
 
     @Column()
     category: string
+
+    @OneToMany(() => Product, (product) => product.prediction, {cascade: true})
+    @JoinColumn({name: "fk_product_id"})
+    products: Product[]
 }

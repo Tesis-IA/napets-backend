@@ -29,7 +29,8 @@ export class PredictionService {
       return await this.predictionRepository.findOne({
         where: {
           id: data.id
-        }
+        },
+        relations: ['products']
       })
     }
 }
