@@ -6,5 +6,20 @@ export class Prediction {
     id: number
 
     @Column()
-    class_name: string
+    name: string
+
+    @Column()
+    description: string
+
+    @Column( "text", {array: true} )
+    images: string[]
+
+    @Column( "text", {array: true} )
+    warning: string[]
+
+    @Column( "text", {array: true} )
+    more_info: string[]
+
+    @Column()
+    category: string
 }
