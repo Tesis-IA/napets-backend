@@ -11,6 +11,7 @@ import { PredictionModule } from './modules/prediction/prediction.module'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { PestDiseaseModule } from './modules/pest-disease/pest-disease.module'
 import { CropsTipsModule } from './modules/crops-tips/crops-tips.module'
+import { ProductModule } from './modules/product/product.module'
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { CropsTipsModule } from './modules/crops-tips/crops-tips.module'
     PestDiseaseModule,
     CropsTipsModule,
     PredictionModule,
+    ProductModule
   ],
   controllers: [AppController],
   providers: [AppService],
