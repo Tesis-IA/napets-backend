@@ -6,6 +6,7 @@ import { Repository } from 'typeorm'
 import { RegisterDto } from '../auth/dto/register.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { Users } from './entities/users.entity'
+import { GuestDto } from '../auth/dto/guest.dto'
 
 @Injectable()
 export class UsersService {
@@ -24,6 +25,10 @@ export class UsersService {
     const user = this.userRepo.create(createUserDto)
 
     return await this.userRepo.save(user)
+  }
+
+  async createUserAsGuest(guestDto: GuestDto) {
+    return await this.userRepo.save(guestDto)
   }
 
   async findAll(): Promise<Users[]> {
