@@ -8,6 +8,7 @@ import {UsersService} from '../users/users.service'
 import {LoginDto} from './dto/login.dto'
 import {RegisterDto} from './dto/register.dto'
 import {TokenDto} from './dto/token.dto'
+import { GuestDto } from './dto/guest.dto'
 
 @Injectable()
 export class AuthService {
@@ -66,6 +67,20 @@ export class AuthService {
     user.password = await hash(user.password, 10);
 
     return await this.usersService.create(user);
+  }
+
+  async continueAsGuest(guestDto: GuestDto) {
+    const userExists = await this.userRepo.findOne({
+      where: {
+        device_id: guestDto.device_id
+      }
+    })
+
+    if (userExists) {
+      return userExists
+    }
+
+    return this.usersService.createUserAsGuest(guestDto)
   }
 
   async isEmailValid(email: string): Promise<boolean> {

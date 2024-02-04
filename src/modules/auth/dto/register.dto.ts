@@ -5,7 +5,7 @@ import { LoginDto } from './login.dto'
 export class RegisterDto extends PartialType(LoginDto) {
   @IsNotEmpty()
   @IsString()
-  username: string
+  username?: string
 
   @IsNotEmpty()
   @IsString()
