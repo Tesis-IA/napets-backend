@@ -1,5 +1,5 @@
 import {
-  Controller,
+  Controller, Param,
   Post, Req,
   UseInterceptors,
 } from '@nestjs/common'
@@ -11,11 +11,11 @@ import { diskStorage } from 'multer'
 
 @Controller('prediction')
 export class PredictionController {
-  constructor(private readonly predictionService: PredictionService) {
+  constructor(
+    private readonly predictionService: PredictionService
+  ) { }
 
-  }
-
-  @Post()
+  @Post(':device_id')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
@@ -28,11 +28,12 @@ export class PredictionController {
       }),
     }),
   )
-  async makePrediction(@Req() request: Request) {
+  async makePrediction(@Param('device_id') deviceId: string, @Req() request: Request) {
     const baseUrl = `${request.protocol}://${request.get('Host')}/public/${FileName.fileName}`
     console.log(baseUrl)
-    return this.predictionService.makePrediction({
-      'url_image': baseUrl
-    })
+    return this.predictionService.makePrediction(
+      deviceId,
+      { 'url_image': baseUrl }
+    )
   }
 }
