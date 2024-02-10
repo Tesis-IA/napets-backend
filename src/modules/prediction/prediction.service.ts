@@ -23,7 +23,7 @@ export class PredictionService {
 
     async makePrediction(deviceId: string, createPredictionDto: CreatePredictionDto) {
       const { data } = await firstValueFrom(
-          this.httpService.post<PredictionDTO>("http://127.0.0.1:8000/api/v1/predictions/predictions", createPredictionDto).pipe(
+          this.httpService.post<PredictionDTO>(API_IA_URL, createPredictionDto).pipe(
             catchError((err: AxiosError) => {
               throw new HttpException(`An occurred when trying get prediction from IA model: ${err}`, 404)
             })
