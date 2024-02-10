@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { History } from '../../history/entitties/history.entity'
 
 @Entity()
 export class Users {
@@ -22,4 +23,7 @@ export class Users {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date
+
+  @OneToMany(() => History, (history_entity) => history_entity.user, {cascade: true})
+  history: History[]
 }

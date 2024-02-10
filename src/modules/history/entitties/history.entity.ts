@@ -6,8 +6,8 @@ export class History {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
-  image: string
+  @Column("text", {array: true})
+  image: string[]
 
   @Column()
   diagnostic: string
@@ -15,7 +15,6 @@ export class History {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at: Date
 
-  @ManyToOne(() => Users, (user) => user.device_id, {cascade: true})
-  @JoinColumn()
+  @ManyToOne(() => Users, (user) => user.history)
   user: Users
 }

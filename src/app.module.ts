@@ -12,6 +12,7 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { PestDiseaseModule } from './modules/pest-disease/pest-disease.module'
 import { CropsTipsModule } from './modules/crops-tips/crops-tips.module'
 import { ProductModule } from './modules/product/product.module'
+import { HistoryModule } from './modules/history/history.module'
 
 @Module({
   imports: [
@@ -43,7 +44,8 @@ import { ProductModule } from './modules/product/product.module'
     PestDiseaseModule,
     CropsTipsModule,
     PredictionModule,
-    ProductModule
+    ProductModule,
+    HistoryModule
   ],
   controllers: [AppController],
   providers: [AppService],

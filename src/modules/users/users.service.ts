@@ -35,8 +35,11 @@ export class UsersService {
     return await this.userRepo.find()
   }
 
-  async findUserById(id: number): Promise<Users> {
-    const user = await this.userRepo.findOne({ where: { id } })
+  async findUserById(id: string): Promise<Users> {
+    const user = await this.userRepo.findOne({
+      where: { device_id: id },
+      relations: ['history']
+    })
 
     if (!user) {
       throw new HttpException('User not found', 404)
@@ -55,7 +58,7 @@ export class UsersService {
     return user
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<Users> {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<Users> {
     const userExists = await this.findUserById(id)
 
     if (!userExists) {
@@ -67,7 +70,7 @@ export class UsersService {
     return await this.userRepo.save(user)
   }
 
-  async remove(id: number): Promise<Users> {
+  async remove(id: string): Promise<Users> {
     const userExists = await this.findUserById(id)
 
     if (!userExists) {
