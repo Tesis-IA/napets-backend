@@ -15,6 +15,13 @@ export class HistoryController {
 
   @Get(':id')
   async findHistoryById(@Param('id') id: string) {
-    return this.historyService.findHistoryByUserId(+id)
+    return this.historyService.findHistoryById(+id)
+  }
+
+  @Get('user/:id')
+  async findHistoryByUserId(
+    @Param('id') id: string
+  ) {
+    return this.historyService.findHistoryByUserId(id)
   }
 }

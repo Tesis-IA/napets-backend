@@ -23,10 +23,15 @@ export class HistoryService {
     await this.historyRepository.save(history)
   }
 
-  async findHistoryByUserId(id: number) {
-    return await this.historyRepository.find({
+  async findHistoryById(id: number) {
+    return await this.historyRepository.findOne({
       where: { id }
     })
+  }
+
+  async findHistoryByUserId(id: string) {
+    const user = await this.usersService.findUserById(id)
+    return user.history
   }
 
   async findAll() {
