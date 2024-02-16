@@ -64,7 +64,15 @@ export class AuthService {
       );
     }
 
+    const deviceExists = await this.userRepo.findOne({
+      where: { device_id: user.device_id },
+    })
+
     user.password = await hash(user.password, 10);
+
+    if (deviceExists) {
+      return await this.usersService.update(deviceExists.device_id, user)
+    }
 
     return await this.usersService.create(user);
   }
