@@ -13,6 +13,7 @@ import { PestDiseaseModule } from './modules/pest-disease/pest-disease.module'
 import { CropsTipsModule } from './modules/crops-tips/crops-tips.module'
 import { ProductModule } from './modules/product/product.module'
 import { HistoryModule } from './modules/history/history.module'
+import { WeatherModule } from './modules/weather/weather.module'
 
 @Module({
   imports: [
@@ -45,7 +46,8 @@ import { HistoryModule } from './modules/history/history.module'
     CropsTipsModule,
     PredictionModule,
     ProductModule,
-    HistoryModule
+    HistoryModule,
+    WeatherModule
   ],
   controllers: [AppController],
   providers: [AppService],
