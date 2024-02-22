@@ -25,13 +25,15 @@ export class PredictionService {
       const { data } = await firstValueFrom(
           this.httpService.post<PredictionDTO>(API_IA_URL, createPredictionDto).pipe(
             catchError((err: AxiosError) => {
-              throw new HttpException(`An occurred when trying get prediction from IA model: ${err}`, 404)
+              throw new HttpException(`An occurred when trying get prediction from IA model: ${err}`, 500)
             })
           )
         )
+
+      console.log(`Data Prediction: ${data.prediction}`)
       const predictionResult =  await this.predictionRepository.findOne({
         where: {
-          id: data.id
+          id: data.likely_class
         },
         relations: ['products']
       })
