@@ -30,7 +30,12 @@ export class PredictionService {
           )
         )
 
+      if (!data.success)
+        throw new HttpException(`La imagen no es valida, asegurese de enfocar la parte afectada del cultivo de arroz`, 500)
+
       console.log(`Data Prediction: ${data.prediction}`)
+      console.log(`Likely Class: ${data.likely_class}`)
+
       const predictionResult =  await this.predictionRepository.findOne({
         where: {
           id: data.likely_class

@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator'
+import { IsBoolean, IsNotEmpty } from 'class-validator'
 
 export class PredictionDTO {
   @IsNotEmpty()
@@ -12,4 +12,7 @@ export class PredictionDTO {
 
   @IsNotEmpty()
   filename: string
+
+  @IsBoolean()
+  success: boolean
 }
