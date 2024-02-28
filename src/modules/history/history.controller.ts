@@ -18,6 +18,11 @@ export class HistoryController {
     return this.historyService.findHistoryById(+id)
   }
 
+  @Get('last-history/:id')
+  async findLastHistoryByUserId(@Param('id') id: string) {
+    return this.historyService.findLastHistoryByUserId(id)
+  }
+
   @Get('user/:id')
   async findHistoryByUserId(
     @Param('id') id: string

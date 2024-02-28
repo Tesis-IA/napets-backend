@@ -35,6 +35,19 @@ export class UsersService {
     return await this.userRepo.find()
   }
 
+  async findLastHistoryByUserId(id: string) {
+    const user = await this.userRepo.findOne({
+      where: { device_id: id },
+      relations: ['history'],
+      order: {
+        history: {
+          created_at: "DESC"
+        }
+      }
+    })
+    return user.history[0]
+  }
+
   async findUserById(id: string): Promise<Users> {
     const user = await this.userRepo.findOne({
       where: { device_id: id },
