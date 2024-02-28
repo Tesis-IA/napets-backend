@@ -29,6 +29,10 @@ export class HistoryService {
     })
   }
 
+  async findLastHistoryByUserId(id: string) {
+    return await this.usersService.findLastHistoryByUserId(id)
+  }
+
   async findHistoryByUserId(id: string) {
     const user = await this.usersService.findUserById(id)
     return user.history
