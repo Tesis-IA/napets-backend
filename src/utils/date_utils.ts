@@ -1,6 +1,6 @@
 export const getNameFileFromDate = (): string => {
   const date: Date = new Date()
-  return `${date.getDay()}${date.getMonth()}${date.getFullYear()}${date.getMilliseconds()}`
+  return `${date.getTime()}`
 }
 
 export class FileName {
