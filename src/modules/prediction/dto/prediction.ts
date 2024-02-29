@@ -1,9 +1,18 @@
-import { IsNotEmpty } from 'class-validator'
+import { IsBoolean, IsNotEmpty } from 'class-validator'
 
 export class PredictionDTO {
   @IsNotEmpty()
-  id: number
+  likely_class: number
 
   @IsNotEmpty()
-  class_name: string
+  content_type: string
+
+  @IsNotEmpty()
+  prediction: number[]
+
+  @IsNotEmpty()
+  filename: string
+
+  @IsBoolean()
+  success: boolean
 }
