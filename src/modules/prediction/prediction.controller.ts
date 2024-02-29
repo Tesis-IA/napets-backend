@@ -21,7 +21,8 @@ export class PredictionController {
       storage: diskStorage({
         destination: 'public',
         filename: (req, file, cb) => {
-          const fileName = `${getNameFileFromDate()}.jpg`
+          const fileName = file.originalname.replace(/\s/g, "_");
+          console.log(file)
           FileName.fileName = fileName
           cb(null, fileName)
         },
