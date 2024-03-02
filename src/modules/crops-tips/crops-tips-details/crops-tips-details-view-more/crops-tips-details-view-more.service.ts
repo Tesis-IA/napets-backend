@@ -15,6 +15,9 @@ export class CropsTipsDetailsViewMoreService {
         const result = await this.cropTipsDetailsViewMoreRepository.find({
             where: {
                 cropsTipsDetails: { id }
+            },
+            order: {
+                id: 'ASC'
             }
         })
         if (!result || result.length === 0) {

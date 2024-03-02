@@ -12,6 +12,10 @@ export class CropsTipsService {
     }
 
     async findAllCropsTips(): Promise<CropsTips[]> {
-        return await this.cropsTipsRepository.find()
+        return await this.cropsTipsRepository.find({
+            order: {
+                id: 'ASC'
+            }
+        })
     }
 }
