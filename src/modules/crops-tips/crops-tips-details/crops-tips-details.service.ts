@@ -14,7 +14,10 @@ export class CropsTipsDetailsService {
     async findCropTipsDetailsById(id: number) {
         const result = await this.cropTipsDetailsRepository.find({
             where: {
-                cropsTips: { id }
+                cropsTips: { id },
+            },
+            order: {
+                id: 'ASC'
             }
         })
         if (!result || result.length === 0) {
