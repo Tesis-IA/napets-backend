@@ -21,7 +21,7 @@ export class CropsTipsDetailsService {
             }
         })
         if (!result || result.length === 0) {
-            throw new HttpException('Crops tips details not found', 404)
+            throw new HttpException('Aún no se han registrado los detalles.', 404)
         }
         return result
     }

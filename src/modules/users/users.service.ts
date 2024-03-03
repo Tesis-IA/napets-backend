@@ -20,7 +20,7 @@ export class UsersService {
     })
 
     if (userExists) {
-      throw new HttpException('User already exists', 400)
+      throw new HttpException('El email ya se ecnuentra en uso', 400)
     }
     const user = this.userRepo.create(createUserDto)
 
@@ -45,6 +45,9 @@ export class UsersService {
         }
       }
     })
+    if (!user) {
+      throw new HttpException('Aún no hay historial', 404)
+    }
     return user.history[0]
   }
 
@@ -55,7 +58,7 @@ export class UsersService {
     })
 
     if (!user) {
-      throw new HttpException('User not found', 404)
+      throw new HttpException(`El usuario con el id ${id} no existe`, 404)
     }
 
     return user
@@ -65,7 +68,7 @@ export class UsersService {
     const user = await this.userRepo.findOne({ where: { email } })
 
     if (!user) {
-      throw new HttpException('User not found', 404)
+      throw new HttpException(`El usuario con el correo ${email} no existe`, 404)
     }
 
     return user
@@ -75,7 +78,7 @@ export class UsersService {
     const userExists = await this.findUserById(id)
 
     if (!userExists) {
-      throw new HttpException('User not found', 404)
+      throw new HttpException(`El usuario con el id ${id} no existe`, 404)
     }
 
     const user = this.userRepo.merge(userExists, updateUserDto)
@@ -87,7 +90,7 @@ export class UsersService {
     const userExists = await this.findUserById(id)
 
     if (!userExists) {
-      throw new HttpException('User not found', 404)
+      throw new HttpException(`El usuario con el id ${id} no existe`, 404)
     }
 
     return await this.userRepo.remove(userExists)
