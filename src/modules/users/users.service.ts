@@ -45,7 +45,7 @@ export class UsersService {
         }
       }
     })
-    if (!user) {
+    if (!user.history[0]) {
       throw new HttpException('Aún no hay historial', 404)
     }
     return user.history[0]
